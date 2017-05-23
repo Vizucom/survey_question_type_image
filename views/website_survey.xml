@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="page" inherit_id="survey.page">
+        <xpath expr="//div[@t-field='question.description']" position="after">
+            <t t-if="question.type == 'image'">
+                <t t-call="survey_question_type_image.image_field"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="survey_print" inherit_id="survey.survey_print">
+        <xpath expr="//t[@t-if='question.description']" position="after">
+            <t t-if="question.type == 'image'">
+                <t t-call="survey_question_type_image.image_field"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="image_field" name="Image">
+        <input type="file" class="form-control" t-att-name="prefix"/>
+    </template>
+</odoo>
