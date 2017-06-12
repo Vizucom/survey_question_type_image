@@ -24,6 +24,7 @@
 =================================
 * A new question type that allows the user to upload an image as an answer
 * Uses jQuery's uploadPreview library (http://opoloo.github.io/jquery_upload_preview/) to show a thumbnail of the uploaded image
+* Note: created for a very specific use case (only one image per survey, intended for the user to upload their own photo). For more generic use, some fine-tuning is very likely required.
 """,
     'data': [
         'views/assets.xml',

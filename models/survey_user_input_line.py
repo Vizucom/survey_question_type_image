@@ -31,21 +31,20 @@ class SurveyUserInputLine(models.Model):
             'survey_id': question.survey_id.id,
             'skipped': False
         }
-        if answer_tag in post:
+        # Skip handling if the contents are an empty string. This way
+        # an existing image will not get overwritten with an empty one if
+        # the user goes back and re-submits without changing the img.
+        if answer_tag in post and post.get(answer_tag) != '':
 
-            # Skip handling if the contents are an empty string. This way
-            # The image will not get overwritten with an empty image if
-            # the user goes back and re-submits without changing the img.
-            if post.get(answer_tag) != '':
-                if type(post[answer_tag].stream) is file:
-                    photo = base64.b64encode(post[answer_tag].read())
-                else:
-                    photo = base64.encodestring(post[answer_tag].stream.getvalue())
+            if type(post[answer_tag].stream) is file:
+                photo = base64.b64encode(post[answer_tag].read())
+            else:
+                photo = base64.encodestring(post[answer_tag].stream.getvalue())
 
-                vals.update({
-                    'answer_type': 'image',
-                    'value_image': photo
-                })
+            vals.update({
+                'answer_type': 'image',
+                'value_image': photo
+            })
         else:
             vals.update({
                 'answer_type': None,
@@ -56,6 +55,7 @@ class SurveyUserInputLine(models.Model):
             ('survey_id', '=', question.survey_id.id),
             ('question_id', '=', question.id)
         ])
+
         if old_uil:
             old_uil.write(vals)
         else:
