@@ -6,6 +6,15 @@
                 <t t-call="survey_question_type_image.image_field"/>
             </t>
         </xpath>
+
+        <!-- clear the "t-att-data-prefill" attribute so that core's prefill function does not trigger,
+        and add a new prefill function that gets called from JS -->
+
+        <xpath expr="//form[@class='js_surveyform']" position="attributes">
+            <attribute name="t-att-data-prefill"></attribute>
+            <attribute name="t-att-data-custom-prefill">'/survey/prefill/%s/%s/%s' % (slug(survey), token, slug(page))</attribute>
+        </xpath>
+
     </template>
 
     <template id="survey_print" inherit_id="survey.survey_print">
@@ -17,6 +26,11 @@
     </template>
 
     <template id="image_field" name="Image">
-        <input type="file" class="form-control" t-att-name="prefix"/>
+        <!-- Use jQuery to show a preview image -->
+        <div id="image-preview">
+          <label for="image-upload" id="image-label"><span class="fa fa-upload"/></label>
+          <input type="file" t-att-name="prefix" id="image-upload" class="form-control"/>
+        </div>
+
     </template>
 </odoo>

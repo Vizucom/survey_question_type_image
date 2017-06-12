@@ -23,9 +23,10 @@
 "Image" question type for Surveys
 =================================
 * A new question type that allows the user to upload an image as an answer
-
+* Uses jQuery's uploadPreview library (http://opoloo.github.io/jquery_upload_preview/) to show a thumbnail of the uploaded image
 """,
     'data': [
+        'views/assets.xml',
         'views/website_survey.xml',
     ],
 }

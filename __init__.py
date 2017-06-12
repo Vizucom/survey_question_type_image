@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#   Copyright (c) 2016- Vizucom Oy (http://www.vizucom.com)
+#   Copyright (c) 2017- Vizucom Oy (http://www.vizucom.com)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -13,4 +13,5 @@
 #
 ##############################################################################
 
+import controllers
 import models
